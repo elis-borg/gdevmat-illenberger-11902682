@@ -29,10 +29,10 @@ class Splatter
     int rng = int(random(2));
     switch(rng){
       case 0:
-        y = int(random(721)); 
+        y = int(random(361)); 
         break;
       case 1:
-        y = -int(random(721));
+        y = -int(random(361));
        
         break;
     }
