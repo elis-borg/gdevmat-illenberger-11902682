@@ -13,7 +13,7 @@ class walker
   
   void randomWalk()
   {//responsible for where our walker would be 
-    int rng = int(random(4));
+    int rng = int(random(4)); //2-0 
     if (rng == 0){
     y+=10; 
     }

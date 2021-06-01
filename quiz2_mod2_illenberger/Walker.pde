@@ -1,6 +1,6 @@
 //defining walker class; classes can contain multi-type data/variables, to access these u must use the dot operator
 
-class walker
+class Walker
 { //needs x+y values for coord/positions
   float x; 
   float y; 

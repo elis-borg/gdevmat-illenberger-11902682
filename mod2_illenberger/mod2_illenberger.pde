@@ -1,3 +1,4 @@
+//2-0
 //RANDOMNESS - diff types of generation, patterns and applications in simulation+processing
 //randomness - quality of state lacking organization, unpredictable, independent of rules
 

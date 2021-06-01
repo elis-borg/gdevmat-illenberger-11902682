@@ -4,7 +4,7 @@ void setup()
   camera(0,0,-(height/2.0) / tan(PI*30.0 /100.0), 0,0,0,0, -1, 0);
 }
 
-walker myWalker = new walker();
+Walker myWalker = new Walker();
 
 void draw()
 {
