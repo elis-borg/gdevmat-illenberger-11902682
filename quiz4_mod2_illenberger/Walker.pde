@@ -1,9 +1,9 @@
 class Walker
 { 
-  public float x, y, extent;
-  public float tx = 0, ty = 100, tExtent = 1;
-  public int r, g, b;
-  public float tr = 4 , tg = 51, tb = 12.09; 
+  public float x, y, extent; //circle coords + scale
+  public float tx = 0, ty = 10000, tExtent = 30000; //circle ts 
+  public int r, g, b; //circle fill colors 
+  public float tr = 4 , tg = 51, tb = 12.09; //circle color ts 
   
   void render()
   {
