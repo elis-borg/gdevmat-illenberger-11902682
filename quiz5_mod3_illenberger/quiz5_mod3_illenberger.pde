@@ -8,9 +8,10 @@ Walker perlinWalker = new Walker();
 
 void draw()
 {
- //flush is found in bounceBack
+ //flush - currently disabled to show the color change
+ //background(255);
   
  perlinWalker.bounceBack();
- perlinWalker.perlinWalk(); 
+ //perlinWalker.perlinWalk(); 
  perlinWalker.render();
 }

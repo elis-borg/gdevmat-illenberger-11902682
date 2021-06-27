@@ -10,9 +10,7 @@ class Walker
   PVector tRgb = new PVector(4, 51, 12.09);
   
   void bounceBack()
-  { //honestly cant tell if bounceback is working properly because of the walk
-  background(255); //flush.
-  
+  {   
   position.add(speed);
   
   if ((position.x > Window.right) || (position.x < Window.left)){
@@ -43,7 +41,8 @@ class Walker
     
   noStroke(); 
   fill (r,g,b,255);
-  circle (position.x,position.y,position.z); //z's value is the extent
+  //circle (position.x,position.y,position.z); //z's value is the extent
+  circle (position.x,position.y,50); //comment out and use above for perlin walk
   
   tRgb.x += 0.4f;
   tRgb.y += 0.15f;
