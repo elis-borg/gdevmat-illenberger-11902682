@@ -1,12 +1,18 @@
-//getting the direction:
-//direction = target.position - my.position
-//add normalize direction to ur position
-//me.position.add.(normalized direction)
+ //INITIALIZE
+ Walker blackhole = new Walker(255,255,255,50); //currently static 
+ Walker[] walkers = new Walker[100];
+ Walker debris = new Walker(34,124,68,45,89,233);
+ int frame;
 
 void setup()
  {
    camera(0, 0, Window.eyeZ,0,0,0,0,-1,0);
    size(1080, 720, P3D); 
+   
+   for(int i=0; i < 100; i++){
+      walkers[i] = new Walker(); //instantiates values for each class in the array.
+      walkers[i].render();  
+   }
  }
  
  PVector mousePos()
@@ -15,32 +21,63 @@ void setup()
    float y = -(mouseY - Window.windowHeight / 2);
    return new PVector(x,y);
  }
- 
- //INITIALIZE
- Walker blackhole = new Walker(255,255,255,100); 
- Walker[] walkers = new Walker[100];
   
- boolean holeSpawned = false; //checks if blackhole has been spawned
+ boolean holesSpawned = false;
+ 
+ PVector direction = PVector.sub(blackhole.position, debris.position);
  
  void draw()
  {
   background(0);
   
-  //SPAWN BLACKHOLE
-  if (holeSpawned != true){
-  blackhole.randomSpawn();
   blackhole.render();
-  holeSpawned = true; 
-  }
-  
-  //SPAWN WALKERS - insert forloop here to draw lotsa circles on the map
+
   for(int i=0; i < 100; i++){
-  walkers[i] = new Walker(); //instantiates values for each class in the array.
-  walkers[i].randomSpawn(); 
-  walkers[i].render();  
+      walkers[i].render();
+      walkers[i].towardsBlackhole(blackhole);
+      blackhole.render();
+    }
+  frame++; 
+  
+  if(frame >= 150){
+    frame = 0;
+    resetMatter();
   }
   
-  PVector direction = PVector.sub(blackhole.position, walkers[10].position); 
-  
-  //use forloop to simulate everyone walking towards blackhole, 
+  //TESTING WITH SINGULAR WALKER
+  /*blackhole.render();
+  debris.render();
+  debris.towardsBlackhole(blackhole);*/ 
  }
+ 
+ void resetMatter()
+  {
+    for(int i=0; i < 100; i++){
+      walkers[i] = new Walker(); //instantiates values for each class in the array.
+      walkers[i].render();  
+   }
+   blackhole.randomSpawn();
+  }
+ 
+ //NOTES FROM LECTURE, TRIAL AND ERROR
+  /*getting the direction:
+  direction = target.position - my.position  
+  add normalize direction to ur position
+  me.position.add.(normalized direction)
+  
+  PVector direction = blackhole.position.sub(walkers[].position)  - will affect the values, need to use static funcs
+  PVector direction = PVector.sub(blackhole.position, walkers[10].position); - the static version
+  normalize direction after getting it
+  direction.normalize(); 
+  move towards the direction
+  add normalize direction to the normalize position
+  walkers[10].position.add(direction);
+  use forloop to simulate everyone walking towards blackhole,  
+  
+  direction = PVector.sub(blackhole.position, debris.position); //direction is updated frequently or else debris will go past the target
+  
+  debris.position.add(direction.normalize().mult(7)); //will continue moving in that direction and not stop on target, need an i
+  //.mult() is there to accelerate the speed of it moving
+  
+  println("location: " + debris.position.x + ", " + debris.position.y);
+  blackhole.render(); - call again so debris is hidden underneath it eventually when it stops moving */ 
