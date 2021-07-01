@@ -1,5 +1,5 @@
  //INITIALIZE
- Walker blackhole = new Walker(255,255,255,50); //currently static 
+ Walker blackhole = new Walker(255,255,255,50);
  Walker[] walkers = new Walker[100];
  Walker debris = new Walker(34,124,68,45,89,233);
  int frame;
@@ -29,6 +29,12 @@ void setup()
  void draw()
  {
   background(0);
+  
+  //BONUS HERE! just uncomment
+  /*PVector mouse = mousePos();
+  mouse.mult(1);
+  blackhole.position.x = mouse.x;
+  blackhole.position.y = mouse.y;*/
   
   blackhole.render();
 

@@ -63,10 +63,14 @@ public class Walker {
     
     float gaussianX = randomGaussian();
      
-    float stdDeviationX = 387; 
+    float stdDeviationX = 491; 
     float meanX = 0; 
      
     position.x  = stdDeviationX * gaussianX + meanX;
+    
+    if (((position.x > Window.right) || (position.x < Window.left)) ){
+     randomSpawn(); //renew if it goes past, acts as a screenborder buffer
+    }
   }
   
   void towardsBlackhole(Walker target)
@@ -77,6 +81,6 @@ public class Walker {
     
     direction = PVector.sub(target.position, position); 
     position.add(direction.normalize().mult(7));
-    println("location: " + debris.position.x + ", " + debris.position.y); 
+    //println("location: " + debris.position.x + ", " + debris.position.y); 
   }
 }
