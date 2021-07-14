@@ -6,22 +6,31 @@ public class Walker
  public PVector direction; 
  
  public float velocityLimit = 10; 
- public float scale = 15; 
+ public float scale; 
+
+public Walker(float size) //cursor
+ {
+   scale  = size;
+   randomSpawn(); 
+ }
 
  public Walker() //default constructor
  {
-   //randomize scale
-    float gaussianScale = randomGaussian();
-    float stdDeviationScale = 15;
-    float meanScale = 2;
-    scale  = stdDeviationScale * gaussianScale + meanScale;
-    
+   scale  = random(15,30);
    randomSpawn(); 
  }
  
- public void update()
- {
-   this.acceleration = PVector.random2D(); 
+ public void update(Walker target)
+ { //speed up/ down of walkers
+ 
+   //lifted from walkTowards();
+   direction = PVector.sub(target.position, position);
+   direction.normalize();
+   
+   //this.acceleration = PVector.random2D(); - ORIGINAL, mod4 lesson
+   this.acceleration = direction;
+   this.acceleration.mult(0.2);
+   
    this.velocity.add(this.acceleration); //modifying our velocity
    this.velocity.limit(velocityLimit);
    this.position.add(this.velocity); //modifying our position
@@ -29,6 +38,7 @@ public class Walker
  
  public void render()
  {
+   fill (180,180,180);
    circle(position.x, position.y, scale);
  }
  
@@ -44,19 +54,8 @@ public class Walker
         break;
     }
   }
- 
- void towardsMouse(Walker target)
-  {
-    /*PVector direction = PVector.sub(target.position, this.position);
-    direction.normalize();
-    this.position.add(direction);*/
-    
-    direction = PVector.sub(target.position, position); 
-    position.add(direction.normalize().mult(7));
-    //println("location: " + debris.position.x + ", " + debris.position.y); 
-  }
- 
- public void checkEdges()
+  
+   public void checkEdges()
  {
   if (this.position.x > Window.right){
     this.position.x = Window.left;
@@ -72,4 +71,15 @@ public class Walker
     this.position.y = Window.top;
   }
  }
+ 
+ void towardsMouse(Walker target)
+  {
+    /*PVector direction = PVector.sub(target.position, this.position);
+    direction.normalize();
+    this.position.add(direction);*/
+    
+    /*direction = PVector.sub(target.position, position);
+    position.add(direction.normalize().mult(10)); //mult is the distance covered each sec?
+    */
+  }
 }

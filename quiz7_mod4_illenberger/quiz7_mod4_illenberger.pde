@@ -1,6 +1,7 @@
  //INITIALIZE
  Walker[] walkers = new Walker[100];
- Walker mouse = new Walker(); 
+ Walker mouse = new Walker(0); 
+ 
  int frame;
 
 void setup()
@@ -20,23 +21,24 @@ void setup()
    float y = -(mouseY - Window.windowHeight / 2);
    return new PVector(x,y);
  }
-  
- boolean holesSpawned = false;
  
  void draw()
  {
-  background(0);
+  background(80);
   
-  /*PVector mousePt = mousePos();
-  mouse.mult(1);
+  PVector mousePt = mousePos();
+  mousePt.mult(1);
   mouse.position.x = mousePt.x;
-  mouse.position.y = mousePt.y;*/
+  mouse.position.y = mousePt.y;
   
   mouse.render();
 
   for(int i=0; i < 100; i++){
+      walkers[i].update(mouse); 
       walkers[i].render();
-      walkers[i].towardsMouse(mouse);
+      //walkers[i].towardsMouse(mouse);
+      walkers[i].checkEdges(); 
+      
       mouse.render();
     }
   /*frame++; 
@@ -45,7 +47,6 @@ void setup()
     frame = 0;
     resetMatter();*/
   }
- }
  
  void resetMatter()
   {
@@ -53,7 +54,7 @@ void setup()
       walkers[i] = new Walker(); //instantiates values for each class in the array.
       walkers[i].render();  
    }
-   blackhole.randomSpawn();
+   mouse.randomSpawn();
   }
  
  
