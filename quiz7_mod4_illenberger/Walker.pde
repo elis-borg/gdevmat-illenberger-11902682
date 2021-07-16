@@ -20,13 +20,9 @@ public Walker(float size) //cursor
    randomSpawn(); 
  }
  
- public void update(Walker target)
+ public void update()
  { //speed up/ down of walkers
- 
-   //lifted from walkTowards();
-   direction = PVector.sub(target.position, position);
-   direction.normalize();
-   
+  
    //this.acceleration = PVector.random2D(); - ORIGINAL, mod4 lesson
    this.acceleration = direction;
    this.acceleration.mult(0.2);
@@ -71,15 +67,4 @@ public Walker(float size) //cursor
     this.position.y = Window.top;
   }
  }
- 
- void towardsMouse(Walker target)
-  {
-    /*PVector direction = PVector.sub(target.position, this.position);
-    direction.normalize();
-    this.position.add(direction);*/
-    
-    /*direction = PVector.sub(target.position, position);
-    position.add(direction.normalize().mult(10)); //mult is the distance covered each sec?
-    */
-  }
 }

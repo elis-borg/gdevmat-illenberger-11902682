@@ -34,27 +34,15 @@ void setup()
   mouse.render();
 
   for(int i=0; i < 100; i++){
-      walkers[i].update(mouse); 
+      //lifted from walkTowards();
+      walkers[i].direction = PVector.sub(mouse.position, walkers[i].position);
+      walkers[i].direction.normalize();
+      walkers[i].update(); 
       walkers[i].render();
-      //walkers[i].towardsMouse(mouse);
       walkers[i].checkEdges(); 
-      
+   
       mouse.render();
     }
-  /*frame++; 
-  
-  if(frame >= 150){
-    frame = 0;
-    resetMatter();*/
-  }
- 
- void resetMatter()
-  {
-    for(int i=0; i < 100; i++){
-      walkers[i] = new Walker(); //instantiates values for each class in the array.
-      walkers[i].render();  
-   }
-   mouse.randomSpawn();
-  }
+ }
  
  
