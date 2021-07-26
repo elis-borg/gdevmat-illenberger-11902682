@@ -43,7 +43,7 @@ public class Walker
  public void checkEdges()
  {
   if (position.x >= Window.right){
-    position.x = Window.right; //exists so as to safeguard pos and not overflow towards the farther end of the edge
+    position.x = Window.right;
     velocity.x *= -1;
   }
   else if (position.x <= Window.left){
@@ -59,5 +59,12 @@ public class Walker
     position.y = Window.bottom;
     velocity.y *= -1;
   }
+ }
+ 
+ public void checkMiddle()
+ {
+   if(this.position.x >= 0){
+   
+   }
  }
 }

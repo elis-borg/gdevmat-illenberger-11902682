@@ -20,7 +20,6 @@ void setup()
 void draw()
 {
   background(255);
-  noStroke();
   for (Walker w: walkers){  //for each loop - an enhanced for loop
     //Friction = -1 * mu * N * v
     float mu = 0.1f; //coefficient of friction
