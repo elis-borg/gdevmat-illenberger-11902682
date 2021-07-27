@@ -1,12 +1,12 @@
- public static class Window
+public static class Window
 {
-    public static int windowWidth = 1280; //depends on how big ur window is, 
-    public static int windowHeight = 720; //make sure u gonna use same parameters in size()
-    public static int w = windowWidth/2;
-    public static int h = windowHeight/2;
-    public static int top = h;
-    public static int bottom = -h;
-    public static int left = -w;
-    public static int right = w;
-    public static float eyeZ = -(windowHeight/2.0) / tan(PI*30.0 / 180.0);
+  public static int widthPx = 1280;
+  public static int heightPx = 720;
+  public static int windowWidth = widthPx / 2;
+  public static int windowHeight = heightPx / 2;
+  public static int top = windowHeight;
+  public static int bottom = -windowHeight;
+  public static int left = -windowWidth;
+  public static int right = windowWidth;
+  public static float eyeZ = -(heightPx/2.0) / tan(PI*30.0 / 180.0);
 }
