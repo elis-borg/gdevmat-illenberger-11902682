@@ -23,7 +23,7 @@ void draw()
   for (Walker w: walkers){  //for each loop - an enhanced for loop
     //Friction = -1 * mu * N * v
     float mu = 0.1f; //coefficient of friction
-    float normal = 1;
+    float normal = 1; //in this universe its 1 
     float frictionMagnitude = mu * normal;
     PVector friction = w.velocity.copy(); //copy() copies the current velocity of our walker
     friction.mult(-1);

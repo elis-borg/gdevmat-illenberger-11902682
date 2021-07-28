@@ -10,7 +10,10 @@ public class Walker
  public float scale = 15; 
  
  public float mass = 1;
-
+ public float mu = 0.01f;
+ public float normal = 1; 
+ public float frictionMagnitude;
+ 
  public Walker()
  {
    r = int(random(256));
@@ -25,8 +28,21 @@ public class Walker
    this.acceleration.add(f);
  }
  
+ public void calculateFriction(PVector friction)
+ {
+   frictionMagnitude = mu*normal;
+   
+   friction.mult(-1);
+   friction.normalize();
+   friction.mult(frictionMagnitude);
+   
+   /*Direction = -1 * unit velocity
+   Magnitude = mu * normal
+   normal = 1; mu = coefficient of friction*/
+ }
+ 
  public void update()
- {   
+ { 
    this.velocity.add(this.acceleration); 
    this.velocity.limit(velocityLimit);
    this.position.add(this.velocity);
@@ -64,7 +80,25 @@ public class Walker
  public void checkMiddle()
  {
    if(this.position.x >= 0){
-   
+     mu = 0.4f;
+     println(mu);
    }
+ }
+ 
+   public void phaseThru()
+ {
+  if (this.position.x > Window.right){
+    this.position.x = Window.left;
+  }
+  else if (this.position.x < Window.left){
+    this.position.x = Window.right;
+  }
+  
+  if (this.position.y > Window.top){
+    this.position.y = Window.bottom;
+  }
+  else if (this.position.y < Window.bottom){
+    this.position.y = Window.top;
+  }
  }
 }

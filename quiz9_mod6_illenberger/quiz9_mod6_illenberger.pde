@@ -1,16 +1,16 @@
 //Q9 - braking walkers
 Walker[] walkers = new Walker[8];
+int posY = 0;
 
 void setup()
 {
   size(1280, 720, P3D);
   camera (0,0,Window.eyeZ,0,0,0,0,-1,0);
- int posY = 0;
  for(int i=0; i < 8; i++){
    posY = 2 * (Window.windowHeight / 8) * (i - 4);   
    walkers[i] = new Walker();
    walkers[i].position = new PVector(-500, posY); 
-   walkers[i].mass = 10-i;
+   walkers[i].mass = 8-i;
    walkers[i].scale = walkers[i].mass * 15; 
  }
 }
@@ -23,35 +23,39 @@ void draw()
   stroke(0,0,0);
   strokeWeight(10);
   line(0,0,0,Window.top); 
-  
-  stroke(0,0,0);
-  strokeWeight(10);
   line(0,0,0,Window.bottom);
   
   //for walkers  
   for (Walker w: walkers){
+    //println("walker's mass: "+ w.mass); //check on each walker mass
     //Friction = -1 * mu * N * v
-    float mu = 0.01f; 
-    float normal = 1;
-    float frictionMagnitude = mu * normal;
-    PVector friction = w.velocity.copy(); 
-    friction.mult(-1);
-    friction.normalize();
-    friction.mult(frictionMagnitude);
+    PVector friction = w.velocity.copy();
+    w.calculateFriction(friction);
     w.applyForce(friction);
     
-    w.acceleration = new PVector(0.2,0);
-    //PVector acceleration = new PVector(0.2,0);
-    PVector gravity = new PVector(0, -0.15 * w.mass);
+    //PVector acceleration = new PVector(0.2,0); //regular
+    PVector acceleration = new PVector(0.05 * w.mass,0); //FOR BONUS
     w.update();
     w.render();
-    //w.applyForce(acceleration);
-    w.applyForce(gravity); 
-    w.checkEdges(); 
-    
-    if(w.position.x >= 0){
-      mu = 0.4f;
-      println("Walker has passed the middle");
-   }
+    w.applyForce(acceleration);
+    println(w.mu); //check on mu's value before reaching midpoint
+    w.checkMiddle(); 
+    w.checkEdges(); //the wall
+    //w.phaseThru();//see how long till the walker stops w/o bumping into a wall
   }
+  
+  if (mousePressed){
+    reset();
+  }
+}
+
+void reset(){
+ posY = 0;
+ for(int i=0; i < 8; i++){
+   posY = 2 * (Window.windowHeight / 8) * (i - 4);   
+   walkers[i] = new Walker();
+   walkers[i].position = new PVector(-500, posY); 
+   walkers[i].mass = 8-i;
+   walkers[i].scale = walkers[i].mass * 15; 
+ }
 }
