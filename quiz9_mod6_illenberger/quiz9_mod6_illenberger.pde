@@ -27,7 +27,6 @@ void draw()
   
   //for walkers  
   for (Walker w: walkers){
-    //println("walker's mass: "+ w.mass); //check on each walker mass
     //Friction = -1 * mu * N * v
     PVector friction = w.velocity.copy();
     w.calculateFriction(friction);
